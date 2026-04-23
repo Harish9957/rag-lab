@@ -1,0 +1,17 @@
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: default
+spec:
+  role: rag-lab-karpenter-node
+  amiSelectorTerms:
+    - alias: al2023@latest
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: rag-lab
+  securityGroupSelectorTerms:
+    - tags:
+        aws:eks:cluster-name: rag-lab
+  tags:
+    Name: rag-lab-karpenter-node
+    karpenter.sh/discovery: rag-lab

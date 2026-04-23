@@ -1,0 +1,9 @@
+region              = "us-east-1"
+aws_profile         = "lab"
+cluster_name        = "rag-lab"
+cluster_version     = "1.34"
+vpc_cidr            = "10.200.0.0/16"
+node_instance_types = ["t3.large"]
+node_desired        = 2
+node_min            = 1
+node_max            = 3

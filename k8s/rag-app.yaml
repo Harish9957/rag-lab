@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: rag-app
+  namespace: rag
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::102515020926:role/rag-lab-bedrock-rag-role"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-app
+  namespace: rag
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rag-app
+  template:
+    metadata:
+      labels:
+        app: rag-app
+    spec:
+      serviceAccountName: rag-app
+      containers:
+        - name: rag-app
+          image: 102515020926.dkr.ecr.us-east-1.amazonaws.com/rag-lab-rag-app:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8501
+          env:
+            - name: CHROMADB_HOST
+              value: "chromadb.rag.svc.cluster.local"
+            - name: CHROMADB_PORT
+              value: "8000"
+            - name: OLLAMA_HOST
+              value: "ollama.rag.svc.cluster.local"
+            - name: OLLAMA_PORT
+              value: "11434"
+            - name: OLLAMA_MODEL
+              value: "llama3.2:3b"
+            - name: LLM_BACKEND
+              value: "ollama"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8501
+            initialDelaySeconds: 15
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8501
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rag-app
+  namespace: rag
+spec:
+  selector:
+    app: rag-app
+  ports:
+    - port: 8501
+      targetPort: 8501
