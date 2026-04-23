@@ -6,6 +6,7 @@ metadata:
 spec:
   project: default
   source:
+    #This is a dummy url
     repoURL: https://github.com/Harish9957/rag-lab.git
     targetRevision: main
     path: k8s/demo-app
