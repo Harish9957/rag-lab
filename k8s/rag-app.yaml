@@ -4,7 +4,7 @@ metadata:
   name: rag-app
   namespace: rag
   annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::102515020926:role/rag-lab-bedrock-rag-role"
+    eks.amazonaws.com/role-arn: "arn:aws:iam::12345678910:role/rag-lab-bedrock-rag-role"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -24,7 +24,7 @@ spec:
       serviceAccountName: rag-app
       containers:
         - name: rag-app
-          image: 102515020926.dkr.ecr.us-east-1.amazonaws.com/rag-lab-rag-app:v1
+          image: 12345678910.dkr.ecr.us-east-1.amazonaws.com/rag-lab-rag-app:v1
           imagePullPolicy: Always
           ports:
             - containerPort: 8501
