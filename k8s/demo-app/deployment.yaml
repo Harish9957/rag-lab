@@ -22,6 +22,7 @@ spec:
     spec:
       containers:
         - name: gitops-demo
+          #Dummy repo
           image: 102515020926.dkr.ecr.us-east-1.amazonaws.com/rag-lab-rag-app:v1.0.0
           ports:
             - containerPort: 8080
