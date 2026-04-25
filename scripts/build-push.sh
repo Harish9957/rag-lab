@@ -4,7 +4,7 @@ set -euo pipefail
 # Configuration
 AWS_PROFILE="XXXXX"
 AWS_REGION="us-east-1"
-AWS_ACCOUNT_ID="123456789102"
+AWS_ACCOUNT_ID="123456789105"
 ECR_REPO="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/rag-lab-rag-app"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 APP_DIR="${SCRIPT_DIR}/../demo-app"
