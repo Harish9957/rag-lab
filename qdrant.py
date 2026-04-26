@@ -1,13 +1,20 @@
-import os
+import time
 from qdrant_client import QdrantClient
 
-# Explicitly use the Service name and Port
-# We hardcode the port here just to rule out the Env Var collision for now
-client = QdrantClient(host="qdrant", port=6333)
+# HARDCODE FOR THE FINAL TEST
+# This proves the connection is possible
+print("Connecting to Qdrant at 'qdrant:6333'...")
 
-print("Attempting to connect...")
 try:
-    client.get_collections()
-    print("✅ Connected!")
+    # We use the Service name directly here
+    client = QdrantClient(host="qdrant", port=6333)
+    
+    # Check collections
+    res = client.get_collections()
+    print(f"✅ SUCCESS! Found collections: {res}")
 except Exception as e:
-    print(f"❌ Failed: {e}")
+    print(f"❌ STILL FAILING: {e}")
+
+# Keep pod alive so we can read this win!
+while True:
+    time.sleep(60)
