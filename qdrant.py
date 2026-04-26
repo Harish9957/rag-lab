@@ -28,7 +28,7 @@ vec_cargo = get_embedding("Argo CD is a GitOps tool")
 print(f"Apple Vector (first 5): {vec_apple[:5]}")
 
 # Connect to the Qdrant pod (via your 6333 port-forward)
-client = QdrantClient(url="http://localhost:6333")
+client = QdrantClient(host="qdrant", port=6333)
 
 # 1. Create the 'Library' (Only do this once)
 client.recreate_collection(
