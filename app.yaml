@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-engine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rag-engine
+  template:
+    metadata:
+      labels:
+        app: rag-engine
+    spec:
+      containers:
+      - name: engine
+        # USE YOUR LOWERCASE USERNAME HERE
+        image: docker.io/harish9959/rag-engine:v1 
+        env:
+        - name: EMBED_URL
+          value: "http://embedding-api:80/embed"
+        - name: QDRANT_URL
+          value: "http://qdrant:6333"
