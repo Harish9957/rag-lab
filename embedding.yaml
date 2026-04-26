@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: embedding-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: embedding-api
+  template:
+    metadata:
+      labels:
+        app: embedding-api
+    spec:
+      containers:
+      - name: server
+        image: ghcr.io/huggingface/text-embeddings-inference:cpu-0.3
+        args: ["--model-id", "sentence-transformers/all-MiniLM-L6-v2", "--port", "80"]
+        ports:
+        - containerPort: 80
