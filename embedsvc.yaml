@@ -8,4 +8,4 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080 # Or whatever port your API container uses
+      targetPort: 80 # Or whatever port your API container uses
