@@ -15,6 +15,9 @@ spec:
       containers:
       - name: qdrant
         image: qdrant/qdrant:latest
+        env:
+        - name: QDRANT__SERVICE__HTTP_ADDRESS
+          value: "0.0.0.0" # This is the magic line
         ports:
         - containerPort: 6333 # API port
         - containerPort: 6334 # gRPC port
