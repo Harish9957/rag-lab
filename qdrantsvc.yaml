@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: qdrant  # This makes 'http://qdrant:6333' work
+spec:
+  selector:
+    app: qdrant # Must match the label in your Qdrant deployment
+  ports:
+    - protocol: TCP
+      port: 6333
+      targetPort: 6333
