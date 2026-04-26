@@ -13,7 +13,6 @@ def get_embedding(text):
     return res.json()[0]
 
 # 1. Your 'Translator' (The pod you just tested)
-EMBED_URL = "http://127.0.0.1:8080/embed"
 
 def get_embedding(text):
     res = requests.post(EMBED_URL, json={"inputs": text})
