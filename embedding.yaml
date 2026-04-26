@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: ghcr.io/huggingface/text-embeddings-inference:cpu-arm64-1.9
+        image: ghcr.io/huggingface/text-embeddings-inference:cpu-arm64-latest
         args: ["--model-id", "sentence-transformers/all-MiniLM-L6-v2", "--port", "80"]
         ports:
         - containerPort: 80
