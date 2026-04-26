@@ -22,3 +22,7 @@ spec:
           value: "http://embedding-api:80/embed"
         - name: QDRANT_URL
           value: "http://qdrant.default.svc.cluster.local:6333"
+        - name: QDRANT_HOST
+    	  value: "qdrant"
+  	- name: QDRANT_PORT_NUM
+    	  value: "6333"
