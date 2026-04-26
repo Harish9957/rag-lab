@@ -66,3 +66,12 @@ results = client.query_points(
 if results:
     print(f"\nSearch Query: {query_text}")
     print(f"AI Result: {results[0].payload['text']} (Score: {results[0].score:.4f})")
+
+
+print(f"AI Result: {results[0].payload['text']} (Score: {results[0].score:.4f})")
+
+# THE STABILITY LOOP: This keeps the container alive
+print("Lab complete. Service is staying alive for inspection...")
+import time
+while True:
+    time.sleep(60)

@@ -15,7 +15,7 @@ spec:
       containers:
       - name: engine
         # USE YOUR LOWERCASE USERNAME HERE
-        image: docker.io/harish9959/rag-engine:v2
+        image: docker.io/harish9959/rag-engine:v3
         imagePullPolicy: Always
         env:
         - name: EMBED_URL
