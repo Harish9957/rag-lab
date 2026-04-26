@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: nginx:latest # Or replace with an AI-related image later
+        image: nginx:1.25.4 # Or replace with an AI-related image later
         ports:
         - containerPort: 80
 ---
