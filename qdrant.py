@@ -45,4 +45,12 @@ print(f"Answer: {get_answer('What is the status of our deployment?')}")
 
 # Keep pod alive to read logs in Argo CD
 while True:
+    print("\n--- TRIGGERING RAG TEST ---", flush=True)
+    ans = get_answer('What is the status of our deployment?')
+    print(f"Answer: {ans}", flush=True)
+    
+    # This ensures the output hits the K8s logs immediately
+    sys.stdout.flush() 
+    
+    print("Waiting 60s for next test...", flush=True)
     time.sleep(60)
