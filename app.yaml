@@ -15,7 +15,7 @@ spec:
       containers:
       - name: engine
         image: docker.io/harish9959/rag-engine:v7
-        imagePullPolicy: Always
+        imagePullPolicy: Always  
         env:
         - name: QDRANT_HOST
           value: "qdrant"
@@ -23,6 +23,8 @@ spec:
           value: "6333"
         - name: OLLAMA_HOST
           value: "http://ollama:11434"
+        - name: PYTHONUNBUFFERED
+          value: "1"
         resources:
           requests:
             cpu: "500m"
