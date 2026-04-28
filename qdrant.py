@@ -27,7 +27,7 @@ def get_answer(question):
         )
         
         # Check if your metadata key is actually 'text'
-        context = " ".join([hit.metadata.get('text', '') for hit in hits])
+        context = " ".join([hit.metadata.get('document', '') for hit in hits])
 
         # 3. Ask Ollama to explain those facts
         response = ollama.Client(host=OLLAMA_HOST).chat(
