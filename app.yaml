@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rag-app
+      app: rag-engine
   template:
     metadata:
       labels:
-        app: rag-app
+        app: rag-engine
     spec:
       containers:
       - name: engine
