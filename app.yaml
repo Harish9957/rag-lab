@@ -26,3 +26,10 @@ spec:
           value: "qdrant"
         - name: QDRANT_PORT_NUM
           value: "6333"
+        resources:
+  	  requests:
+    	    cpu: "500m"
+    	    memory: "512Mi"
+  	  limits:
+    	    cpu: "1000m"   # Give it a full core to finish the math
+            memory: "1Gi"   # 1GB is the safe zone for local RAG
