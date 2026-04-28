@@ -32,7 +32,10 @@ def get_answer(question):
 
         response = ollama.Client(host=OLLAMA_HOST).chat(
             model='llama3.2:1b',
-            messages=[{'role': 'user', 'content': f"Context: {context}\n\nQuestion: {question}"}],
+            messages=[{'role': 'user', 'content': f"""Use ONLY the following context to answer the question.'content': f"""Use ONLY the following context to answer the question.
+  
+            Context: {context}
+            Question: {question}"""
         )
         return response['message']['content']
     except Exception as e:
