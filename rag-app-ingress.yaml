@@ -2,24 +2,28 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rag-app-ingress
-  namespace: default # Or wherever your rag-engine lives
+  namespace: default
+  annotations:
+    # This is the magic line that strips the prefix
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: nginx
   rules:
   - host: rag-lab.local
     http:
       paths:
-      - path: /
-        pathType: Prefix
+      - path: /qdrant(/|$)(.*)  # Captures everything after /qdrant into $2
+        pathType: ImplementationSpecific
         backend:
           service:
-            name: rag-engine  # Your Python App Service
-            port:
-              number: 8000
-      - path: /qdrant
-        pathType: Prefix
-        backend:
-          service:
-            name: qdrant      # Your Vector DB Service
+            name: qdrant
             port:
               number: 6333
+      - path: /(.*)            # Your RAG engine (if needed)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: rag-engine
+            port:
+              number: 8000
