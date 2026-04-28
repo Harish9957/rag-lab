@@ -21,3 +21,11 @@ spec:
         ports:
         - containerPort: 6333 # API port
         - containerPort: 6334 # gRPC port
+        volumeMounts:
+        - name: qdrant-data
+          mountPath: /qdrant/storage
+      # 2. Link the volume to the PVC we created
+      volumes:
+      - name: qdrant-data
+        persistentVolumeClaim:
+          claimName: qdrant-storage-pvc
