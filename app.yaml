@@ -3,33 +3,30 @@ kind: Deployment
 metadata:
   name: rag-engine
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: rag-engine
+      app: rag-app
   template:
     metadata:
       labels:
-        app: rag-engine
+        app: rag-app
     spec:
       containers:
       - name: engine
-        # USE YOUR LOWERCASE USERNAME HERE
         image: docker.io/harish9959/rag-engine:v7
         imagePullPolicy: Always
         env:
-        - name: EMBED_URL
-          value: "http://embedding-api:80/embed"
-        - name: QDRANT_URL
-          value: "http://qdrant.default.svc.cluster.local:6333"
         - name: QDRANT_HOST
           value: "qdrant"
         - name: QDRANT_PORT_NUM
           value: "6333"
+        - name: OLLAMA_HOST
+          value: "http://ollama:11434"
         resources:
-  	  requests:
-    	    cpu: "500m"
-    	    memory: "512Mi"
-  	  limits:
-    	    cpu: "1000m"   # Give it a full core to finish the math
-            memory: "1Gi"   # 1GB is the safe zone for local RAG
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+          limits:
+            cpu: "1000m"
+            memory: "1Gi"
