@@ -18,25 +18,26 @@ except Exception as e:
 
 def get_answer(question):
     try:
-        # 2. Get facts from Qdrant
-        # Note: Ensure the collection 'tech_docs' actually exists!
+        print(f"DEBUG: Starting search for: {question}")
         hits = client.query(
             collection_name="tech_docs",
             query_text=question,
             limit=3
         )
-        
-        # Check if your metadata key is actually 'text'
-        context = " ".join([hit.metadata.get('document', '') for hit in hits])
+        print(f"DEBUG: Found {len(hits)} hits from Qdrant.")
 
-        # 3. Ask Ollama to explain those facts
+        # Updated to 'document' based on our previous fix
+        context = " ".join([hit.metadata.get('document', '') for hit in hits])
+        print("DEBUG: Context prepared. Sending to Ollama...")
+
         response = ollama.Client(host=OLLAMA_HOST).chat(
             model='llama3.2:1b',
             messages=[{'role': 'user', 'content': f"Context: {context}\n\nQuestion: {question}"}],
         )
         return response['message']['content']
     except Exception as e:
-        return f"Error during RAG flow: {e}"
+        print(f"DEBUG: Error in get_answer: {e}")
+        return f"Error: {e}"
 
 # Run the test
 print("\n--- RAG TEST ---")
