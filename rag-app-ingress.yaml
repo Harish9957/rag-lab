@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rag-app-ingress
+  namespace: default # Or wherever your rag-engine lives
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: rag-lab.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rag-engine  # Your Python App Service
+            port:
+              number: 8000
+      - path: /qdrant
+        pathType: Prefix
+        backend:
+          service:
+            name: qdrant      # Your Vector DB Service
+            port:
+              number: 6333
